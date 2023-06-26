@@ -60,7 +60,7 @@ if __name__ == "__main__":
     TL_Et = TL_Et / max
 
     # Generate plot
-    fig, axes = plt.subplots(2, 2, figsize=(3, 3))
+    fig, axes = plt.subplots(2, 1, figsize=(3, 3))
 
     # ------------------ Generate spectrum figure ------------------
     ax2 = axes[0].twinx()
@@ -75,6 +75,13 @@ if __name__ == "__main__":
         color=c1,
         label="Measured",
         alpha=0.3,
+        linewidth=0,
+    )
+    axes[0].plot(
+        Spectrometer_data[0],
+        Spectrometer_data[1],
+        color=c1,
+        linewidth=0.75,
         linestyle="--",
     )
     ax2.plot(FROG_data[0][ROI], FROG_data[2][ROI], color=c2, linewidth=0.75)
@@ -97,8 +104,9 @@ if __name__ == "__main__":
         color=c1,
         label="Transform limit",
         alpha=0.3,
-        linestyle="--",
+        linewidth=0,
     )
+    axes[1].plot(TL_data[0], TL_Et, color=c1, linewidth=0.75, linestyle="--")
     ax3.plot(FROG_data[3][ROI_t], FROG_data[5][ROI_t], color=c2, linewidth=0.75)
 
     axes[1].set_ylabel("Intensity (arb)")
@@ -107,9 +115,6 @@ if __name__ == "__main__":
     axes[1].set_xlim(t_minimum, t_maximum)
     axes[1].legend()
     # --------------------------------------------------------------
-
-    # ---------------- Display measured FROG trade -----------------
-    axes[2].imshow()
 
     fig.tight_layout()
     plt.savefig("figures/combined_frog_plot.jpg", dpi=500)
