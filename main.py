@@ -60,7 +60,7 @@ if __name__ == "__main__":
     TL_Et = TL_Et / max
 
     # Generate plot
-    fig, axes = plt.subplots(2, 1, figsize=(3, 3))
+    fig, axes = plt.subplots(2, 1, figsize=(2.5, 3))
 
     # ------------------ Generate spectrum figure ------------------
     ax2 = axes[0].twinx()
