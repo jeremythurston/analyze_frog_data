@@ -59,8 +59,11 @@ if __name__ == "__main__":
     FROG_Et = FROG_Et / max
     TL_Et = TL_Et / max
 
+    # peak_power = np.sum(TL_Et * np.abs(TL_data[0][-1] - TL_data[0][-2])) * pulse_energy * 1e3  # [GW]
+    peak_power = 1  # [GW]
+
     # Generate plot
-    fig, axes = plt.subplots(2, 1, figsize=(2.5, 3))
+    fig, axes = plt.subplots(2, 1, figsize=(3, 3))
 
     # ------------------ Generate spectrum figure ------------------
     ax2 = axes[0].twinx()
@@ -96,20 +99,25 @@ if __name__ == "__main__":
     # ------------------ Generate temporal figure ------------------
     ax3 = axes[1].twinx()
 
-    axes[1].plot(FROG_data[3], FROG_Et, label="Retrieved", color=c1, linewidth=0.75)
+    axes[1].plot(
+        FROG_data[3], FROG_Et * peak_power, label="Retrieved", color=c1, linewidth=0.75
+    )
     axes[1].fill_between(
         TL_data[0],
         0,
-        TL_Et,
+        TL_Et * peak_power,
         color=c1,
         label="Transform limit",
         alpha=0.3,
         linewidth=0,
     )
-    axes[1].plot(TL_data[0], TL_Et, color=c1, linewidth=0.75, linestyle="--")
+    axes[1].plot(
+        TL_data[0], TL_Et * peak_power, color=c1, linewidth=0.75, linestyle="--"
+    )
     ax3.plot(FROG_data[3][ROI_t], FROG_data[5][ROI_t], color=c2, linewidth=0.75)
 
-    axes[1].set_ylabel("Intensity (arb)")
+    # axes[1].set_ylabel("Power (GW)")
+    axes[1].set_ylabel("Power (arb)")
     ax3.set_ylabel("Phase (rad)")
     axes[1].set_xlabel("Time (fs)")
     axes[1].set_xlim(t_minimum, t_maximum)
