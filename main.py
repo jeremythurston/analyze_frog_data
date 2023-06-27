@@ -26,8 +26,8 @@ frog_folder = "FROG retrievals/FROG8"
 spectrum_file = "OceanOptics Spectra/FROG8_spectrum.txt"
 wl_minimum = 1400  # Minimum wavelength [nm]
 wl_maximum = 1700  # Maximum wavelength [nm]
-t_minimum = -200  # Minimum time [fs]
-t_maximum = 200  # Maximum time [fs]
+t_minimum = -300  # Minimum time [fs]
+t_maximum = 300  # Maximum time [fs]
 FROG_threshold = 0.03  # Phase data below this threshold is not shown
 pulse_energy = 1  # Pulse energy [mJ]
 # --------------------------------------------------------------
@@ -63,7 +63,7 @@ if __name__ == "__main__":
     peak_power = 1  # [GW]
 
     # Generate plot
-    fig, axes = plt.subplots(2, 1, figsize=(3, 3))
+    fig, axes = plt.subplots(2, 1, figsize=(3, 4))
 
     # ------------------ Generate spectrum figure ------------------
     ax2 = axes[0].twinx()
@@ -107,7 +107,7 @@ if __name__ == "__main__":
         0,
         TL_Et * peak_power,
         color=c1,
-        label="Transform limit",
+        label="FTL",
         alpha=0.3,
         linewidth=0,
     )
