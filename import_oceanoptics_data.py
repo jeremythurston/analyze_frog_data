@@ -3,7 +3,7 @@ import numpy as np
 
 
 def import_oceanoptics_data(filename):
-    data = pd.read_csv(filename, delimiter=",", names=["wls", "counts"])
+    data = pd.read_csv(filename, delimiter="\t", names=["wls", "counts"], skiprows=13)
     wls, counts = data["wls"], data["counts"]
     # baseline = np.median(np.sort(counts)[counts < (0.05 * np.max(counts))])
     # counts = counts - baseline

@@ -25,9 +25,9 @@ def calculate_transform_limit(wls, intensity, wl_min, wl_max):
     t = t * 1e15
 
     # Sometimes doesn't work when the function is not well-behaved
-    # spline = UnivariateSpline(t, E - np.max(E) / 2, s=0)
-    # r1, r2 = spline.roots()
-    # fwhm = np.abs(r2 - r1)
+    spline = UnivariateSpline(t, E - np.max(E) / 2, s=0)
+    r1, r2 = spline.roots()
+    fwhm = np.abs(r2 - r1)
 
-    # return [t, E, fwhm]
-    return [t, E]
+    return [t, E, fwhm]
+    # return [t, E]

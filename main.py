@@ -22,12 +22,12 @@ c1, c2 = "#33BBEE", "#EE7733"
 # --------------------------------------------------------------
 
 # ---------------------- Parameters ----------------------------
-frog_folder = "FROG retrievals/FROG8"
-spectrum_file = "OceanOptics Spectra/FROG8_spectrum.txt"
-wl_minimum = 1400  # Minimum wavelength [nm]
-wl_maximum = 1700  # Maximum wavelength [nm]
-t_minimum = -300  # Minimum time [fs]
-t_maximum = 300  # Maximum time [fs]
+frog_folder = "FROG retrievals/FROG 23 - through shaper - SLM off"
+spectrum_file = "OceanOptics Spectra/USB2G130511__0__12-49-48-385.txt"
+wl_minimum = 700  # Minimum wavelength [nm]
+wl_maximum = 900  # Maximum wavelength [nm]
+t_minimum = -250  # Minimum time [fs]
+t_maximum = 250  # Maximum time [fs]
 FROG_threshold = 0.03  # Phase data below this threshold is not shown
 pulse_energy = 1  # Pulse energy [mJ]
 # --------------------------------------------------------------
@@ -46,11 +46,13 @@ if __name__ == "__main__":
     TL_data = calculate_transform_limit(
         Spectrometer_data[0], Spectrometer_data[1], wl_minimum, wl_maximum
     )
+    # Print FWHM
+    print(f"FTL FWHM: {TL_data[2]:.1f} fs")
 
     # Normalize temporal data
     # TODO: incorporate pulse_energy to calculate peak powers
     FROG_Et = FROG_data[4] / np.sum(
-        FROG_data[4] * np.abs(FROG_data[0][-1] - FROG_data[0][-2])
+        FROG_data[4] * np.abs(FROG_data[3][-1] - FROG_data[3][-2])
     )
     TL_Et = TL_data[1] / np.sum(TL_data[1] * np.abs(TL_data[0][-1] - TL_data[0][-2]))
 
